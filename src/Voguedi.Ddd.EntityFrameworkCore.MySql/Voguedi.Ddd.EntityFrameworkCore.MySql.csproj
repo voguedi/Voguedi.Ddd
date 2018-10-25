@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>voguedi</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Voguedi.Ddd.EntityFrameworkCore\Voguedi.Ddd.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>
