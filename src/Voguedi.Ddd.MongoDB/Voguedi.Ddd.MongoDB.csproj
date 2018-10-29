@@ -5,10 +5,11 @@
     <RootNamespace />
     <Authors>voguedi</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Voguedi.Utils.MongoDB" Version="1.0.0" />
+    <PackageReference Include="Voguedi.Utils.MongoDB" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

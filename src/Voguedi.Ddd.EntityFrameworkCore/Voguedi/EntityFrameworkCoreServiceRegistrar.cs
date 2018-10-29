@@ -26,7 +26,7 @@ namespace Voguedi
 
         public void Register(IServiceCollection services)
         {
-            services.AddEntityFrameworkCore<TDbContext>(setupAction);
+            services.AddDbContext<TDbContext>(setupAction);
             services.TryAddScoped<IRepositoryContext, EntityFrameworkCoreRepositoryContext<TDbContext>>();
             services.TryAddScoped<IRepositoryContext<TDbContext>, EntityFrameworkCoreRepositoryContext<TDbContext>>();
         }
