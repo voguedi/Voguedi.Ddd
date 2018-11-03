@@ -184,7 +184,7 @@ namespace Voguedi.Application.Services
 
         public virtual void Delete(TIdentity id)
         {
-            if (id.Equals(default(TIdentity)))
+            if (Equals(id, default(TIdentity)))
                 throw new ArgumentNullException(nameof(id));
 
             var aggregateRoot = Repository.Find(id);
@@ -198,7 +198,7 @@ namespace Voguedi.Application.Services
 
         public virtual async Task DeleteAsync(TIdentity id)
         {
-            if (id.Equals(default(TIdentity)))
+            if (Equals(id, default(TIdentity)))
                 throw new ArgumentNullException(nameof(id));
 
             var aggregateRoot = await Repository.FindAsync(id);
@@ -212,7 +212,7 @@ namespace Voguedi.Application.Services
 
         public virtual TDataObject Find(TIdentity id)
         {
-            if (id.Equals(default(TIdentity)))
+            if (Equals(id, default(TIdentity)))
                 throw new ArgumentNullException(nameof(id));
 
             return MapToDataObject(Repository.Find(id));
@@ -220,7 +220,7 @@ namespace Voguedi.Application.Services
 
         public virtual async Task<TDataObject> FindAsync(TIdentity id)
         {
-            if (id.Equals(default(TIdentity)))
+            if (Equals(id, default(TIdentity)))
                 throw new ArgumentNullException(nameof(id));
 
             return MapToDataObject(await Repository.FindAsync(id));
@@ -228,7 +228,7 @@ namespace Voguedi.Application.Services
 
         public virtual void Modify(TIdentity id, TModifyDataObject modifyDataObject)
         {
-            if (id.Equals(default(TIdentity)))
+            if (Equals(id, default(TIdentity)))
                 throw new ArgumentNullException(nameof(id));
 
             if (modifyDataObject == null)
@@ -240,7 +240,7 @@ namespace Voguedi.Application.Services
 
         public virtual async Task ModifyAsync(TIdentity id, TModifyDataObject modifyDataObject)
         {
-            if (id.Equals(default(TIdentity)))
+            if (Equals(id, default(TIdentity)))
                 throw new ArgumentNullException(nameof(id));
 
             if (modifyDataObject == null)
