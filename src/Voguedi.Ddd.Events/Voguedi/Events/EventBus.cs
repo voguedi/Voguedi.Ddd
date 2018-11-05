@@ -72,7 +72,7 @@ namespace Voguedi.Events
                         await HandleAsync(e, handler);
                 }
                 else
-                    logger.LogWarning($"事件 [Type = {typeof(TEvent)}, Id = {e.Id}] 未注册任何处理器！");
+                    logger.LogError($"事件 [Type = {typeof(TEvent)}, Id = {e.Id}] 未注册任何处理器！");
             }
         }
 
