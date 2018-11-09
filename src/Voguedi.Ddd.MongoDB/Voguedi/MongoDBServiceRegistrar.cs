@@ -18,7 +18,7 @@ namespace Voguedi
 
         #region Ctors
 
-        public MongoDBServiceRegistrar(Action<MongoDBOptions> setupAction) => this.setupAction = setupAction ?? throw new ArgumentNullException(nameof(setupAction));
+        public MongoDBServiceRegistrar(Action<MongoDBOptions> setupAction) => this.setupAction = setupAction;
 
         #endregion
 

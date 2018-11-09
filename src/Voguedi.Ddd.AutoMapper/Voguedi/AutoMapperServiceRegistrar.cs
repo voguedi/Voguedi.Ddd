@@ -14,8 +14,7 @@ namespace Voguedi
 
         #region Ctors
 
-        public AutoMapperServiceRegistrar(Action<AutoMapperMapperConfigurationExpression> setupAction)
-            => this.setupAction = setupAction ?? throw new ArgumentNullException(nameof(setupAction));
+        public AutoMapperServiceRegistrar(Action<AutoMapperMapperConfigurationExpression> setupAction) => this.setupAction = setupAction;
 
         #endregion
 

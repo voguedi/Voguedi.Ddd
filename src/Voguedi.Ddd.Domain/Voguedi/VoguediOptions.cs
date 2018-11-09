@@ -11,9 +11,9 @@ namespace Voguedi
 
         #endregion
 
-        #region Public Properties
+        #region Internal Properties
 
-        public IReadOnlyList<IServiceRegistrar> ServiceRegistrars => serviceRegistrars;
+        internal IReadOnlyList<IServiceRegistrar> ServiceRegistrars => serviceRegistrars;
 
         #endregion
 

@@ -18,7 +18,7 @@ namespace Voguedi
 
         #region Ctors
 
-        public EntityFrameworkCoreServiceRegistrar(Action<DbContextOptionsBuilder> setupAction) => this.setupAction = setupAction ?? throw new ArgumentNullException(nameof(setupAction));
+        public EntityFrameworkCoreServiceRegistrar(Action<DbContextOptionsBuilder> setupAction) => this.setupAction = setupAction;
 
         #endregion
 
