@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using Voguedi.Domain.AggregateRoots;
+using Voguedi.MongoDB;
 
 namespace Voguedi.Domain.Repositories.MongoDB
 {
@@ -12,7 +13,10 @@ namespace Voguedi.Domain.Repositories.MongoDB
 
         public MongoDBRepository(IRepositoryContext context)
         {
-
+            DbContext = (IMongoDBContext)context.DbContext;
+            Database = DbContext.Database;
+            Collection = Database.GetCollection<TAggregateRoot>(typeof(TAggregateRoot).Name);
+            Session = DbContext.Session;
         }
 
         #endregion
@@ -48,6 +52,8 @@ namespace Voguedi.Domain.Repositories.MongoDB
         #endregion
 
         #region IMongoDBRepository<TAggregateRoot, TIdentity>
+
+        public IMongoDBContext DbContext { get; }
 
         public IMongoDatabase Database { get; }
 

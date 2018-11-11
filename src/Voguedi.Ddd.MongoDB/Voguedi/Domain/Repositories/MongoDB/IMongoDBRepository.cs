@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Voguedi.Domain.AggregateRoots;
+using Voguedi.MongoDB;
 
 namespace Voguedi.Domain.Repositories.MongoDB
 {
@@ -7,6 +8,8 @@ namespace Voguedi.Domain.Repositories.MongoDB
         where TAggregateRoot : class, IAggregateRoot<TIdentity>
     {
         #region Properties
+
+        IMongoDBContext DbContext { get; }
 
         IMongoDatabase Database { get; }
 
