@@ -16,16 +16,16 @@ namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Controllers
         #region Private Fields
 
         readonly INoteService service;
-        readonly IEventBus eventBus;
+        readonly IEventPublisher eventPublisher;
 
         #endregion
 
         #region Ctors
 
-        public NotesController(INoteService service, IEventBus eventBus)
+        public NotesController(INoteService service, IEventPublisher eventPublisher)
         {
             this.service = service;
-            this.eventBus = eventBus;
+            this.eventPublisher = eventPublisher;
         }
 
         #endregion
@@ -167,7 +167,7 @@ namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Controllers
 
                 if (dataObject != null)
                 {
-                    await eventBus.PublishAsync(new NoteLogEvent(dataObject));
+                    await eventPublisher.PublishAsync(new NoteLogEvent(dataObject));
                     return NoContent();
                 }
 

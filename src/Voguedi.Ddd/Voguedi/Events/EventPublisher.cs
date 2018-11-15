@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Voguedi.Events
 {
-    class EventBus : IEventBus
+    class EventPublisher : IEventPublisher
     {
         #region Private Fields
 
@@ -21,7 +21,7 @@ namespace Voguedi.Events
 
         #region Ctors
 
-        public EventBus(IServiceProvider serviceProvider, ILogger<EventBus> logger)
+        public EventPublisher(IServiceProvider serviceProvider, ILogger<EventPublisher> logger)
         {
             this.serviceProvider = serviceProvider;
             this.logger = logger;
@@ -48,19 +48,19 @@ namespace Voguedi.Events
             {
                 var handlerMethod = handler.GetType().GetTypeInfo().GetMethod("HandleAsync", new[] { e.GetType() });
                 await (Task)handlerMethod.Invoke(handler, new object[] { e });
-                logger.LogInformation( $"事件处理器 [{handler.GetType()}] 执行成功！ [EventType = {e.GetType()}, EventId = {e.Id}]");
+                logger.LogInformation( $"事件处理器执行成功！ [EventType = {e.GetType()}, EventId = {e.Id}, EventHandlerType = {handler.GetType()}]");
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, $"事件处理器 [{handler.GetType()}] 执行失败！ [EventType = {e.GetType()}, EventId = {e.Id}]");
+                logger.LogError(ex, $"事件处理器执行失败！ [EventType = {e.GetType()}, EventId = {e.Id}, EventHandlerType = {handler.GetType()}]");
             }
         }
 
         #endregion
 
-        #region IEventBus
+        #region IEventPublisher
 
-        async Task IEventBus.PublishAsync<TEvent>(TEvent e)
+        async Task IEventPublisher.PublishAsync<TEvent>(TEvent e)
         {
             using (var serviceScope = serviceProvider.CreateScope())
             {
@@ -72,7 +72,7 @@ namespace Voguedi.Events
                         await HandleAsync(e, handler);
                 }
                 else
-                    logger.LogError($"事件 [Type = {typeof(TEvent)}, Id = {e.Id}] 未注册任何处理器！");
+                    logger.LogError($"事件未注册任何处理器！ [EventType = {typeof(TEvent)}, EventId = {e.Id}] ");
             }
         }
 

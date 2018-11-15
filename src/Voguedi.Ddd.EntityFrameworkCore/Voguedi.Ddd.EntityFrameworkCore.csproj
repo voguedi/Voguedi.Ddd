@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace />
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>voguedi</Authors>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Voguedi.Ddd.Domain\Voguedi.Ddd.Domain.csproj" />
+    <ProjectReference Include="..\Voguedi.Ddd\Voguedi.Ddd.csproj" />
   </ItemGroup>
 
 </Project>

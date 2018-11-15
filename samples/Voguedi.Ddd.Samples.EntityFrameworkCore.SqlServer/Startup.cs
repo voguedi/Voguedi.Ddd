@@ -37,7 +37,6 @@ namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer
                     o.CreateMap<Note, NoteDataObject>();
                 });
                 s.UseSqlServerEntityFrameworkCore<NoteDbContext>(@"Server=(localdb)\MSSQLLocalDB;Database=Samples;Trusted_Connection=True");
-                s.UseEventBus();
             });
             services.AddSwaggerGen(s =>
             {

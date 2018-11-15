@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Voguedi.Ddd.Domain\Voguedi.Ddd.Domain.csproj" />
+    <PackageReference Include="Voguedi.Utils" Version="1.1.9" />
   </ItemGroup>
 
 </Project>
