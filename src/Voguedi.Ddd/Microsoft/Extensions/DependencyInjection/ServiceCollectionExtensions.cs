@@ -36,7 +36,6 @@ namespace Microsoft.Extensions.DependencyInjection
             if (setupAction == null)
                 throw new ArgumentNullException(nameof(setupAction));
             
-            services.AddDependencyServices();
             AddEventHandler(services);
 
             var options = new VoguediOptions();
