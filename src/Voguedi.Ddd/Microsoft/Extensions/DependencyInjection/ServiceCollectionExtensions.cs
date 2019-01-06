@@ -37,6 +37,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(setupAction));
             
             AddEventHandler(services);
+            services.TryAddSingleton<IEventPublisher, EventPublisher>();
 
             var options = new VoguediOptions();
             setupAction(options);
@@ -44,6 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             foreach (var serviceRegistrar in options.ServiceRegistrars)
                 serviceRegistrar.Register(services);
+
             return services;
         }
 

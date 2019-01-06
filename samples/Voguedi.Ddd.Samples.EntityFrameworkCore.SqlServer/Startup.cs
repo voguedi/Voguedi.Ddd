@@ -29,7 +29,7 @@ namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDependencyServices();
+            services.AddDependencyServicesFromCurrentDomainDirectory();
             services.AddVoguedi(s =>
             {
                 s.UseAutoMapper(o =>

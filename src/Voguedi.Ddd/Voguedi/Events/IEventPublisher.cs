@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Voguedi.DependencyInjection;
 
 namespace Voguedi.Events
 {
-    public interface IEventPublisher : ISingletonDependency
+    public interface IEventPublisher
     {
         #region Methods
 
