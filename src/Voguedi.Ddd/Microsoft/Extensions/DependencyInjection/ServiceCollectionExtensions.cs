@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,18 +11,13 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class ServiceCollectionExtensions
     {
         #region Private Methods
-
-        static IEnumerable<Type> GetImplementations(Type service) => TypeFinder.Instance.GetTypes().Where(t => t.IsClass && !t.IsAbstract && service.IsAssignableFrom(t));
-
-        static IEnumerable<Type> GetServices(Type service, Type implementation)
-            => implementation.GetTypeInfo().GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == service);
-
-        static void AddEventHandler(IServiceCollection services)
+        
+        static void AddEventHandler(IServiceCollection services, params Assembly[] assemblies)
         {
-            foreach (var implementation in GetImplementations(typeof(IEventHandler)))
+            foreach (var implementationType in new TypeFinder().GetTypesBySpecifiedType(typeof(IEventHandler<>), assemblies))
             {
-                foreach (var service in GetServices(typeof(IEventHandler<>), implementation))
-                    services.TryAddTransient(service, implementation);
+                foreach (var serviceType in implementationType.GetTypeInfo().ImplementedInterfaces.Where(i => i != typeof(IEventHandler)))
+                    services.TryAddEnumerable(ServiceDescriptor.Transient(serviceType, implementationType));
             }
         }
 
@@ -35,17 +29,26 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (setupAction == null)
                 throw new ArgumentNullException(nameof(setupAction));
-            
-            AddEventHandler(services);
+
             services.TryAddSingleton<IEventPublisher, EventPublisher>();
 
             var options = new VoguediOptions();
             setupAction(options);
-            services.AddSingleton(options);
 
             foreach (var serviceRegistrar in options.ServiceRegistrars)
                 serviceRegistrar.Register(services);
 
+            var assemblies = options.Assemblies;
+            AddEventHandler(services, assemblies);
+            services.AddUitls(assemblies);
+            services.AddAutoMapper(s =>
+            {
+                s.Assemblies = assemblies;
+
+                if (options.MapConfigs?.Length > 0)
+                    s.MapConfigs.AddRange(options.MapConfigs);
+            });
+            services.AddAspectCore(options.AspectConfig);
             return services;
         }
 

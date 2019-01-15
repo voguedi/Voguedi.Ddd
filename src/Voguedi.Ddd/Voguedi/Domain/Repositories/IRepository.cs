@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Voguedi.AspectCore;
 using Voguedi.Domain.AggregateRoots;
 
 namespace Voguedi.Domain.Repositories
@@ -12,17 +13,17 @@ namespace Voguedi.Domain.Repositories
     {
         #region Methods
 
-        void Create(TAggregateRoot aggregateRoot);
+        void Create([NotNull] TAggregateRoot aggregateRoot);
 
-        Task CreateAsync(TAggregateRoot aggregateRoot);
+        Task CreateAsync([NotNull] TAggregateRoot aggregateRoot);
 
-        void Delete(TAggregateRoot aggregateRoot);
+        void Delete([NotNull] TAggregateRoot aggregateRoot);
 
-        Task DeleteAsync(TAggregateRoot aggregateRoot);
+        Task DeleteAsync([NotNull] TAggregateRoot aggregateRoot);
 
-        void Modify(TAggregateRoot aggregateRoot);
+        void Modify([NotNull] TAggregateRoot aggregateRoot);
 
-        Task ModifyAsync(TAggregateRoot aggregateRoot);
+        Task ModifyAsync([NotNull] TAggregateRoot aggregateRoot);
 
         IQueryable<TAggregateRoot> GetAll();
 
@@ -38,9 +39,9 @@ namespace Voguedi.Domain.Repositories
 
         Task<TAggregateRoot> FindSingleAsync(Expression<Func<TAggregateRoot, bool>> specification = null);
 
-        TAggregateRoot Find(TIdentity id);
+        TAggregateRoot Find([NotNull] TIdentity id);
 
-        Task<TAggregateRoot> FindAsync(TIdentity id);
+        Task<TAggregateRoot> FindAsync([NotNull] TIdentity id);
 
         int CountAll(Expression<Func<TAggregateRoot, bool>> specification = null);
 

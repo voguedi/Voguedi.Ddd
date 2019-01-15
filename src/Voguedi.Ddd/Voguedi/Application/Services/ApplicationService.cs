@@ -162,9 +162,6 @@ namespace Voguedi.Application.Services
 
         public virtual TDataObject Create(TCreateDataObject createDataObject)
         {
-            if (createDataObject == null)
-                throw new ArgumentNullException(nameof(createDataObject));
-
             var aggregateRoot = MapToAggregateRoot(createDataObject);
             Repository.Create(aggregateRoot);
             RepositoryContext.Commit();
@@ -173,9 +170,6 @@ namespace Voguedi.Application.Services
 
         public virtual async Task<TDataObject> CreateAsync(TCreateDataObject createDataObject)
         {
-            if (createDataObject == null)
-                throw new ArgumentNullException(nameof(createDataObject));
-
             var aggregateRoot = MapToAggregateRoot(createDataObject);
             await Repository.CreateAsync(aggregateRoot);
             await RepositoryContext.CommitAsync();
@@ -184,9 +178,6 @@ namespace Voguedi.Application.Services
 
         public virtual void Delete(TIdentity id)
         {
-            if (Equals(id, default(TIdentity)))
-                throw new ArgumentNullException(nameof(id));
-
             var aggregateRoot = Repository.Find(id);
 
             if (aggregateRoot != null)
@@ -198,9 +189,6 @@ namespace Voguedi.Application.Services
 
         public virtual async Task DeleteAsync(TIdentity id)
         {
-            if (Equals(id, default(TIdentity)))
-                throw new ArgumentNullException(nameof(id));
-
             var aggregateRoot = await Repository.FindAsync(id);
 
             if (aggregateRoot != null)
@@ -210,42 +198,18 @@ namespace Voguedi.Application.Services
             }
         }
 
-        public virtual TDataObject Find(TIdentity id)
-        {
-            if (Equals(id, default(TIdentity)))
-                throw new ArgumentNullException(nameof(id));
+        public virtual TDataObject Find(TIdentity id) => MapToDataObject(Repository.Find(id));
 
-            return MapToDataObject(Repository.Find(id));
-        }
-
-        public virtual async Task<TDataObject> FindAsync(TIdentity id)
-        {
-            if (Equals(id, default(TIdentity)))
-                throw new ArgumentNullException(nameof(id));
-
-            return MapToDataObject(await Repository.FindAsync(id));
-        }
+        public virtual async Task<TDataObject> FindAsync(TIdentity id) => MapToDataObject(await Repository.FindAsync(id));
 
         public virtual void Modify(TIdentity id, TModifyDataObject modifyDataObject)
         {
-            if (Equals(id, default(TIdentity)))
-                throw new ArgumentNullException(nameof(id));
-
-            if (modifyDataObject == null)
-                throw new ArgumentNullException(nameof(modifyDataObject));
-
             Repository.Modify(MapToAggregateRoot(modifyDataObject, Repository.Find(id)));
             RepositoryContext.Commit();
         }
 
         public virtual async Task ModifyAsync(TIdentity id, TModifyDataObject modifyDataObject)
         {
-            if (Equals(id, default(TIdentity)))
-                throw new ArgumentNullException(nameof(id));
-
-            if (modifyDataObject == null)
-                throw new ArgumentNullException(nameof(modifyDataObject));
-
             await Repository.ModifyAsync(MapToAggregateRoot(modifyDataObject, Repository.Find(id)));
             await RepositoryContext.CommitAsync();
         }

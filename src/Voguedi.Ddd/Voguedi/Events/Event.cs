@@ -1,5 +1,5 @@
 ﻿using System;
-using Voguedi.IdentityGeneration;
+using Voguedi.Utils;
 
 namespace Voguedi.Events
 {
@@ -9,7 +9,7 @@ namespace Voguedi.Events
 
         protected Event()
         {
-            Id = StringIdentityGenerator.Instance.Generate();
+            Id = ObjectId.NewObjectId().ToString();
             Timestamp = DateTime.UtcNow;
         }
 

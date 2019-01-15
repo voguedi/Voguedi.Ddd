@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Voguedi.Application.DataObjects;
+using Voguedi.AspectCore;
 using Voguedi.DependencyInjection;
 
 namespace Voguedi.Application.Services
@@ -11,21 +12,21 @@ namespace Voguedi.Application.Services
     {
         #region Methods
 
-        TDataObject Create(TCreateDataObject createDataObject);
+        TDataObject Create([NotNull] TCreateDataObject createDataObject);
 
-        Task<TDataObject> CreateAsync(TCreateDataObject createDataObject);
+        Task<TDataObject> CreateAsync([NotNull] TCreateDataObject createDataObject);
 
-        void Delete(TIdentity id);
+        void Delete([NotNull] TIdentity id);
 
-        Task DeleteAsync(TIdentity id);
+        Task DeleteAsync([NotNull] TIdentity id);
 
-        void Modify(TIdentity id, TModifyDataObject modifyDataObject);
+        void Modify([NotNull] TIdentity id, [NotNull] TModifyDataObject modifyDataObject);
 
-        Task ModifyAsync(TIdentity id, TModifyDataObject modifyDataObject);
+        Task ModifyAsync([NotNull] TIdentity id, [NotNull] TModifyDataObject modifyDataObject);
 
-        TDataObject Find(TIdentity id);
+        TDataObject Find([NotNull] TIdentity id);
 
-        Task<TDataObject> FindAsync(TIdentity id);
+        Task<TDataObject> FindAsync([NotNull] TIdentity id);
 
         #endregion
     }

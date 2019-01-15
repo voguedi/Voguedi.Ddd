@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using AspectCore.Configuration;
+using IAutoMapperMapperConfigurationExpression = AutoMapper.IMapperConfigurationExpression;
 
 namespace Voguedi
 {
@@ -14,6 +17,12 @@ namespace Voguedi
         #region Internal Properties
 
         internal IReadOnlyList<IServiceRegistrar> ServiceRegistrars => serviceRegistrars;
+        
+        internal Assembly[] Assemblies { get; set; }
+
+        internal Action<IAutoMapperMapperConfigurationExpression>[] MapConfigs { get; set; }
+
+        internal Action<IAspectConfiguration> AspectConfig { get; set; }
 
         #endregion
 
@@ -26,6 +35,12 @@ namespace Voguedi
 
             serviceRegistrars.Add(serviceRegistrar);
         }
+
+        public void RegisterAssemblies(params Assembly[] assemblies) => Assemblies = assemblies;
+
+        public void RegisterAutoMapper(params Action<IAutoMapperMapperConfigurationExpression>[] mapConfigs) => MapConfigs = mapConfigs;
+
+        public void RegisterAspectCore(Action<IAspectConfiguration> aspectConfig) => AspectConfig = aspectConfig;
 
         #endregion
     }

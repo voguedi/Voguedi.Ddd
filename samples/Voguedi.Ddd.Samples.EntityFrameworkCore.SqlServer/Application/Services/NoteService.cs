@@ -6,24 +6,16 @@ using Voguedi.Application.Services;
 using Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Application.DataObjects;
 using Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Domain.Model;
 using Voguedi.Domain.Repositories;
-using Voguedi.IdentityGeneration;
 using Voguedi.ObjectMapping;
+using Voguedi.Utils;
 
 namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Application.Services
 {
     class NoteService : ApplicationService<Note, NoteDataObject, string, NoteCreateDataObject, NoteModifyDataObject>, INoteService
     {
-        #region Private Fields
-
-        readonly IStringIdentityGenerator identityGenerator;
-
-        #endregion
-
         #region Ctors
 
-        public NoteService(IRepositoryContext repositoryContext, IObjectMapper objectMapper, IStringIdentityGenerator identityGenerator)
-            : base(repositoryContext, objectMapper)
-            => this.identityGenerator = identityGenerator;
+        public NoteService(IRepositoryContext repositoryContext, IObjectMapper objectMapper) : base(repositoryContext, objectMapper) { }
 
         #endregion
 
@@ -39,7 +31,7 @@ namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Application.Services
             if (string.IsNullOrWhiteSpace(note.Content))
                 note.Content = null;
 
-            note.Id = identityGenerator.Generate();
+            note.Id = ObjectId.NewObjectId().ToString();
             return note;
         }
 

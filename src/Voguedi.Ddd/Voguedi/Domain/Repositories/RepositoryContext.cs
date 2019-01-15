@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using Voguedi.DisposableObjects;
 using Voguedi.Domain.AggregateRoots;
-using Voguedi.IdentityGeneration;
+using Voguedi.Utils;
 
 namespace Voguedi.Domain.Repositories
 {
@@ -20,7 +20,7 @@ namespace Voguedi.Domain.Repositories
 
         protected RepositoryContext(TDbContext dbContext)
         {
-            Id = StringIdentityGenerator.Instance.Generate();
+            Id = ObjectId.NewObjectId().ToString();
             DbContext = dbContext;
         }
 

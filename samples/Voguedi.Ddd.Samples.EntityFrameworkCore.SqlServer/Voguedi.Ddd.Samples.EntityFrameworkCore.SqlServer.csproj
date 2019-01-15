@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Voguedi.Ddd.AutoMapper\Voguedi.Ddd.AutoMapper.csproj" />
     <ProjectReference Include="..\..\src\Voguedi.Ddd.EntityFrameworkCore.SqlServer\Voguedi.Ddd.EntityFrameworkCore.SqlServer.csproj" />
     <ProjectReference Include="..\..\src\Voguedi.Ddd.EntityFrameworkCore\Voguedi.Ddd.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\src\Voguedi.Ddd\Voguedi.Ddd.csproj" />
