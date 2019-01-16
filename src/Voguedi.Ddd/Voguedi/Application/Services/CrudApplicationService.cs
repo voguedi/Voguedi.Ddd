@@ -9,8 +9,8 @@ using Voguedi.ObjectMapping;
 
 namespace Voguedi.Application.Services
 {
-    public abstract class ApplicationService<TAggregateRoot, TDataObject, TIdentity, TCreateDataObject, TModifyDataObject>
-        : IApplicationService<TDataObject, TIdentity, TCreateDataObject, TModifyDataObject>
+    public abstract class CrudApplicationService<TAggregateRoot, TDataObject, TIdentity, TCreateDataObject, TModifyDataObject>
+        : ICrudApplicationService<TDataObject, TIdentity, TCreateDataObject, TModifyDataObject>
         where TAggregateRoot : class, IAggregateRoot<TIdentity>
         where TDataObject : class, IDataObject<TIdentity>
         where TCreateDataObject : class
@@ -26,7 +26,7 @@ namespace Voguedi.Application.Services
 
         #region Ctors
 
-        protected ApplicationService(IRepositoryContext repositoryContext, IObjectMapper objectMapper)
+        protected CrudApplicationService(IRepositoryContext repositoryContext, IObjectMapper objectMapper)
         {
             RepositoryContext = repositoryContext;
             Repository = repositoryContext.GetRepository<TAggregateRoot, TIdentity>();
@@ -43,15 +43,11 @@ namespace Voguedi.Application.Services
         protected virtual TAggregateRoot MapToAggregateRoot(TModifyDataObject modifyDataObject, TAggregateRoot aggregateRoot)
             => modifyDataObject != null ? ObjectMapper.Map(modifyDataObject, aggregateRoot) : null;
 
-        protected virtual TDataObject MapToDataObject(TAggregateRoot aggregateRoot)
-            => aggregateRoot != null ? ObjectMapper.Map<TAggregateRoot, TDataObject>(aggregateRoot) : null;
+        protected virtual TDataObject MapToDataObject(TAggregateRoot aggregateRoot) => aggregateRoot != null ? ObjectMapper.Map<TAggregateRoot, TDataObject>(aggregateRoot) : null;
 
         protected virtual IReadOnlyList<TDataObject> CreateRange(IReadOnlyList<TCreateDataObject> createDataObjects)
         {
-            if (createDataObjects == null)
-                throw new ArgumentNullException(nameof(createDataObjects));
-
-            if (createDataObjects.Count > 0)
+            if (createDataObjects?.Count > 0)
             {
                 var aggregateRoots = createDataObjects.Select(dto => MapToAggregateRoot(dto));
 
@@ -158,10 +154,13 @@ namespace Voguedi.Application.Services
 
         #endregion
 
-        #region IApplicationService<TDataObject, TIdentity, TCreateDataObject, TModifyDataObject>
+        #region ICrudApplicationService<TDataObject, TIdentity, TCreateDataObject, TModifyDataObject>
 
         public virtual TDataObject Create(TCreateDataObject createDataObject)
         {
+            if (createDataObject == null)
+                throw new ArgumentNullException(nameof(createDataObject));
+
             var aggregateRoot = MapToAggregateRoot(createDataObject);
             Repository.Create(aggregateRoot);
             RepositoryContext.Commit();
@@ -170,6 +169,9 @@ namespace Voguedi.Application.Services
 
         public virtual async Task<TDataObject> CreateAsync(TCreateDataObject createDataObject)
         {
+            if (createDataObject == null)
+                throw new ArgumentNullException(nameof(createDataObject));
+
             var aggregateRoot = MapToAggregateRoot(createDataObject);
             await Repository.CreateAsync(aggregateRoot);
             await RepositoryContext.CommitAsync();
@@ -178,24 +180,20 @@ namespace Voguedi.Application.Services
 
         public virtual void Delete(TIdentity id)
         {
-            var aggregateRoot = Repository.Find(id);
+            if (Equals(id, default(TIdentity)))
+                throw new ArgumentNullException(nameof(id));
 
-            if (aggregateRoot != null)
-            {
-                Repository.Delete(aggregateRoot);
-                RepositoryContext.Commit();
-            }
+            Repository.Delete(id);
+            RepositoryContext.Commit();
         }
 
         public virtual async Task DeleteAsync(TIdentity id)
         {
-            var aggregateRoot = await Repository.FindAsync(id);
+            if (Equals(id, default(TIdentity)))
+                throw new ArgumentNullException(nameof(id));
 
-            if (aggregateRoot != null)
-            {
-                await Repository.DeleteAsync(aggregateRoot);
-                await RepositoryContext.CommitAsync();
-            }
+            await Repository.DeleteAsync(id);
+            await RepositoryContext.CommitAsync();
         }
 
         public virtual TDataObject Find(TIdentity id) => MapToDataObject(Repository.Find(id));
@@ -204,12 +202,24 @@ namespace Voguedi.Application.Services
 
         public virtual void Modify(TIdentity id, TModifyDataObject modifyDataObject)
         {
+            if (Equals(id, default(TIdentity)))
+                throw new ArgumentNullException(nameof(id));
+
+            if (modifyDataObject == null)
+                throw new ArgumentNullException(nameof(id));
+
             Repository.Modify(MapToAggregateRoot(modifyDataObject, Repository.Find(id)));
             RepositoryContext.Commit();
         }
 
         public virtual async Task ModifyAsync(TIdentity id, TModifyDataObject modifyDataObject)
         {
+            if (Equals(id, default(TIdentity)))
+                throw new ArgumentNullException(nameof(id));
+
+            if (modifyDataObject == null)
+                throw new ArgumentNullException(nameof(id));
+
             await Repository.ModifyAsync(MapToAggregateRoot(modifyDataObject, Repository.Find(id)));
             await RepositoryContext.CommitAsync();
         }
@@ -217,15 +227,15 @@ namespace Voguedi.Application.Services
         #endregion
     }
 
-    public abstract class ApplicationService<TAggregateRoot, TDataObject, TIdentity>
-        : ApplicationService<TAggregateRoot, TDataObject, TIdentity, TDataObject, TDataObject>
-        , IApplicationService<TDataObject, TIdentity>
+    public abstract class CrudApplicationService<TAggregateRoot, TDataObject, TIdentity>
+        : CrudApplicationService<TAggregateRoot, TDataObject, TIdentity, TDataObject, TDataObject>
+        , ICrudApplicationService<TDataObject, TIdentity>
         where TAggregateRoot : class, IAggregateRoot<TIdentity>
         where TDataObject : class, IDataObject<TIdentity>
     {
         #region Ctors
 
-        protected ApplicationService(IRepositoryContext repositoryContext, IObjectMapper objectMapper) : base(repositoryContext, objectMapper) { }
+        protected CrudApplicationService(IRepositoryContext repositoryContext, IObjectMapper objectMapper) : base(repositoryContext, objectMapper) { }
 
         #endregion
     }

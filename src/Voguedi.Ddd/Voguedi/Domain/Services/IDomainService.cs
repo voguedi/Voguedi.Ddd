@@ -1,6 +1,4 @@
-﻿using Voguedi.DependencyInjection;
-
-namespace Voguedi.Domain.Services
+﻿namespace Voguedi.Domain.Services
 {
-    public interface IDomainService : IScopedDependency { }
+    public interface IDomainService { }
 }

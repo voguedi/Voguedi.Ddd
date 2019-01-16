@@ -21,6 +21,14 @@ namespace Voguedi.Domain.Repositories
 
         Task DeleteAsync([NotNull] TAggregateRoot aggregateRoot);
 
+        void Delete(TIdentity id);
+
+        Task DeleteAsync(TIdentity id);
+
+        void Delete([NotNull] Expression<Func<TAggregateRoot, bool>> specification);
+
+        Task DeleteAsync([NotNull] Expression<Func<TAggregateRoot, bool>> specification);
+
         void Modify([NotNull] TAggregateRoot aggregateRoot);
 
         Task ModifyAsync([NotNull] TAggregateRoot aggregateRoot);
@@ -39,9 +47,9 @@ namespace Voguedi.Domain.Repositories
 
         Task<TAggregateRoot> FindSingleAsync(Expression<Func<TAggregateRoot, bool>> specification = null);
 
-        TAggregateRoot Find([NotNull] TIdentity id);
+        TAggregateRoot Find(TIdentity id);
 
-        Task<TAggregateRoot> FindAsync([NotNull] TIdentity id);
+        Task<TAggregateRoot> FindAsync(TIdentity id);
 
         int CountAll(Expression<Func<TAggregateRoot, bool>> specification = null);
 

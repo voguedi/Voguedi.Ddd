@@ -43,6 +43,32 @@ namespace Voguedi.Domain.Repositories
             return Task.CompletedTask;
         }
 
+        public virtual void Delete(TIdentity id)
+        {
+            var aggregateRoot = Find(id);
+
+            if (aggregateRoot != null)
+                Delete(aggregateRoot);
+        }
+
+        public virtual Task DeleteAsync(TIdentity id)
+        {
+            Delete(id);
+            return Task.CompletedTask;
+        }
+
+        public virtual void Delete(Expression<Func<TAggregateRoot, bool>> specification)
+        {
+            foreach (var aggregateRoot in FindAll(specification))
+                Delete(aggregateRoot);
+        }
+
+        public virtual Task DeleteAsync(Expression<Func<TAggregateRoot, bool>> specification)
+        {
+            Delete(specification);
+            return Task.CompletedTask;
+        }
+
         public virtual bool Exists(Expression<Func<TAggregateRoot, bool>> specification = null) => specification != null ? GetAll().Any(specification) : GetAll().Any();
 
         public virtual Task<bool> ExistsAsync(Expression<Func<TAggregateRoot, bool>> specification = null)

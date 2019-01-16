@@ -31,29 +31,35 @@ namespace Voguedi.Domain.Repositories.EntityFrameworkCore
 
         public override void Modify(TAggregateRoot aggregateRoot) => DbSet.Update(aggregateRoot);
 
-        public override async Task CreateAsync(TAggregateRoot aggregateRoot)
-            => await DbSet.AddAsync(aggregateRoot);
+        public override Task CreateAsync(TAggregateRoot aggregateRoot) => DbSet.AddAsync(aggregateRoot);
 
-        public override async Task<int> CountAllAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
-            => specification != null ? await GetAll().Where(specification).CountAsync() : await GetAll().CountAsync();
+        public override async Task DeleteAsync(TIdentity id) => await DeleteAsync(await FindAsync(id));
 
-        public override async Task<bool> ExistsAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
-            => specification != null ? await GetAll().AnyAsync(specification) : await GetAll().AnyAsync();
+        public override async Task DeleteAsync(Expression<Func<TAggregateRoot, bool>> specification)
+        {
+            foreach (var aggregateRoot in await FindAllAsync(specification))
+                await DeleteAsync(aggregateRoot);
+        }
+
+        public override Task<int> CountAllAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
+            => specification != null ? GetAll().Where(specification).CountAsync() : GetAll().CountAsync();
+
+        public override Task<bool> ExistsAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
+            => specification != null ? GetAll().AnyAsync(specification) : GetAll().AnyAsync();
 
         public override async Task<IReadOnlyList<TAggregateRoot>> FindAllAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
             => specification != null ? await GetAll().Where(specification).ToListAsync() : await GetAll().ToListAsync();
 
-        public override async Task<TAggregateRoot> FindAsync(TIdentity id)
-            => await GetAll().FirstOrDefaultAsync(GetIdEqualitySepcification(id));
+        public override Task<TAggregateRoot> FindAsync(TIdentity id) => GetAll().FirstOrDefaultAsync(GetIdEqualitySepcification(id));
 
-        public override async Task<TAggregateRoot> FindFirstAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
-            => specification != null ? await GetAll().FirstOrDefaultAsync(specification) : await GetAll().FirstOrDefaultAsync();
+        public override Task<TAggregateRoot> FindFirstAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
+            => specification != null ? GetAll().FirstOrDefaultAsync(specification) : GetAll().FirstOrDefaultAsync();
 
-        public override async Task<TAggregateRoot> FindSingleAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
-            => specification != null ? await GetAll().SingleOrDefaultAsync(specification) : await GetAll().SingleOrDefaultAsync();
+        public override Task<TAggregateRoot> FindSingleAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
+            => specification != null ? GetAll().SingleOrDefaultAsync(specification) : GetAll().SingleOrDefaultAsync();
 
-        public override async Task<long> LongCountAllAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
-            => specification != null ? await GetAll().Where(specification).LongCountAsync() : await GetAll().LongCountAsync();
+        public override Task<long> LongCountAllAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
+            => specification != null ? GetAll().Where(specification).LongCountAsync() : GetAll().LongCountAsync();
 
         #endregion
 

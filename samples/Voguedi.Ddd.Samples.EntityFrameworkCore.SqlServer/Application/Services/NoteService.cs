@@ -11,7 +11,7 @@ using Voguedi.Utils;
 
 namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Application.Services
 {
-    class NoteService : ApplicationService<Note, NoteDataObject, string, NoteCreateDataObject, NoteModifyDataObject>, INoteService
+    class NoteService : CrudApplicationService<Note, NoteDataObject, string, NoteCreateDataObject, NoteModifyDataObject>, INoteService
     {
         #region Ctors
 

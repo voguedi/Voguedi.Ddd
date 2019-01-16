@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.Application.Services
 {
-    public interface INoteService : IApplicationService<NoteDataObject, string, NoteCreateDataObject, NoteModifyDataObject>
+    public interface INoteService : ICrudApplicationService<NoteDataObject, string, NoteCreateDataObject, NoteModifyDataObject>
     {
         #region Methods
 

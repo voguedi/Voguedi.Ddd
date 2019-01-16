@@ -5,13 +5,13 @@
     <RootNamespace />
     <Authors>voguedi</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Voguedi.Utils" Version="1.4.0" />
+    <PackageReference Include="Voguedi.Utils" Version="1.4.1" />
     <PackageReference Include="Voguedi.Utils.AspectCore" Version="1.0.0" />
-    <PackageReference Include="Voguedi.Utils.AutoMapper" Version="1.1.2" />
+    <PackageReference Include="Voguedi.Utils.AutoMapper" Version="1.1.3" />
   </ItemGroup>
 
 </Project>

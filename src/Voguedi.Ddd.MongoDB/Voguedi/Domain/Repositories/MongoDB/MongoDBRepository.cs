@@ -35,19 +35,23 @@ namespace Voguedi.Domain.Repositories.MongoDB
 
         public override void Delete(TAggregateRoot aggregateRoot) => Collection.DeleteOne(Session, BuildSpecification(aggregateRoot));
 
-        public override IQueryable<TAggregateRoot> GetAll() => Collection.AsQueryable();
+        public override void Delete(TIdentity id) => Collection.DeleteOne(Session, BuildSpecification(id));
 
         public override void Modify(TAggregateRoot aggregateRoot) => Collection.ReplaceOne(Session, BuildSpecification(aggregateRoot), aggregateRoot);
 
-        public override async Task CreateAsync(TAggregateRoot aggregateRoot) => await Collection.InsertOneAsync(Session, aggregateRoot);
+        public override Task CreateAsync(TAggregateRoot aggregateRoot) => Collection.InsertOneAsync(Session, aggregateRoot);
 
-        public override async Task DeleteAsync(TAggregateRoot aggregateRoot) => await Collection.DeleteOneAsync(Session, BuildSpecification(aggregateRoot));
+        public override Task DeleteAsync(TAggregateRoot aggregateRoot) => Collection.DeleteOneAsync(Session, BuildSpecification(aggregateRoot));
 
-        public override async Task ModifyAsync(TAggregateRoot aggregateRoot) => await Collection.ReplaceOneAsync(Session, BuildSpecification(aggregateRoot), aggregateRoot);
+        public override Task DeleteAsync(TIdentity id) => Collection.DeleteOneAsync(Session, BuildSpecification(id));
+
+        public override Task ModifyAsync(TAggregateRoot aggregateRoot) => Collection.ReplaceOneAsync(Session, BuildSpecification(aggregateRoot), aggregateRoot);
+
+        public override IQueryable<TAggregateRoot> GetAll() => Collection.AsQueryable();
 
         public override TAggregateRoot Find(TIdentity id) => Collection.Find(BuildSpecification(id)).FirstOrDefault();
 
-        public override async Task<TAggregateRoot> FindAsync(TIdentity id) => await Collection.Find(BuildSpecification(id)).FirstOrDefaultAsync();
+        public override Task<TAggregateRoot> FindAsync(TIdentity id) => Collection.Find(BuildSpecification(id)).FirstOrDefaultAsync();
 
         #endregion
 
