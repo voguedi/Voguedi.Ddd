@@ -7,7 +7,7 @@ using Voguedi.MongoDB;
 
 namespace Voguedi
 {
-    class MongoDBServiceRegistrar<TDbContext> : IServiceRegistrar
+    public class MongoDBServiceRegistrar<TDbContext> : IServiceRegistrar
         where TDbContext : class, IMongoDBContext
     {
         #region Private Fields

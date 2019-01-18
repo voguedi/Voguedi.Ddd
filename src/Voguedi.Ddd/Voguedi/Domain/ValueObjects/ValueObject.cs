@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -26,8 +25,8 @@ namespace Voguedi.Domain.ValueObjects
             if (GetType() != obj.GetType())
                 return false;
 
-            var other = obj as ValueObject;
-            return other != null && GetEqualityPropertryValues().SequenceEqual(other.GetEqualityPropertryValues());
+            var other = (ValueObject)obj;
+            return GetEqualityPropertryValues().SequenceEqual(other.GetEqualityPropertryValues());
         }
 
         public override int GetHashCode()

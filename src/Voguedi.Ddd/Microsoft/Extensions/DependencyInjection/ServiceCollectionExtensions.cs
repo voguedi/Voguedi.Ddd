@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         #region Private Methods
 
-        static void AddDomainService(IServiceCollection services, params Assembly[] assemblies)
+        static void AddDomainServices(IServiceCollection services, params Assembly[] assemblies)
         {
             foreach (var implementationType in new TypeFinder().GetTypesBySpecifiedType<IDomainService>(assemblies))
             {
@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
             }
         }
 
-        static void AddApplicationService(IServiceCollection services, params Assembly[] assemblies)
+        static void AddApplicationServices(IServiceCollection services, params Assembly[] assemblies)
         {
             foreach (var implementationType in new TypeFinder().GetTypesBySpecifiedType<IApplicationService>(assemblies))
             {
@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
             }
         }
 
-        static void AddEventHandler(IServiceCollection services, params Assembly[] assemblies)
+        static void AddEventHandlers(IServiceCollection services, params Assembly[] assemblies)
         {
             foreach (var implementationType in new TypeFinder().GetTypesBySpecifiedType(typeof(IEventHandler<>), assemblies))
             {
@@ -58,9 +58,9 @@ namespace Microsoft.Extensions.DependencyInjection
                 serviceRegistrar.Register(services);
 
             var assemblies = options.Assemblies;
-            AddDomainService(services, assemblies);
-            AddApplicationService(services, assemblies);
-            AddEventHandler(services, assemblies);
+            AddDomainServices(services, assemblies);
+            AddApplicationServices(services, assemblies);
+            AddEventHandlers(services, assemblies);
             services.AddUitls(assemblies);
             services.AddAutoMapper(s =>
             {

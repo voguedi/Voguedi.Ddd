@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Voguedi.Events
 {
-    class EventPublisher : IEventPublisher
+    public class EventPublisher : IEventPublisher
     {
         #region Private Fields
 

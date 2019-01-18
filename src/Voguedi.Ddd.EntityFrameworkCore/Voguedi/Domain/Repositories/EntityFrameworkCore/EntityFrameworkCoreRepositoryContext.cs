@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Voguedi.Domain.Repositories.EntityFrameworkCore
 {
-    class EntityFrameworkCoreRepositoryContext<TDbContext> : RepositoryContext<TDbContext>
+    public class EntityFrameworkCoreRepositoryContext<TDbContext> : RepositoryContext<TDbContext>
         where TDbContext : DbContext
     {
         #region Private Fields

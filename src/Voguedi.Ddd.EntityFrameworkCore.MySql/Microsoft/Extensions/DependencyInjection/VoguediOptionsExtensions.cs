@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
             if (string.IsNullOrWhiteSpace(connectionString))
                 throw new ArgumentNullException(nameof(connectionString));
 
-            return options.UseEntityFrameworkCore<TDbContext>(s => s.UseMySQL(connectionString));
+            return options.UseEntityFrameworkCore<TDbContext>(s => s.UseMySql(connectionString));
         }
 
         #endregion

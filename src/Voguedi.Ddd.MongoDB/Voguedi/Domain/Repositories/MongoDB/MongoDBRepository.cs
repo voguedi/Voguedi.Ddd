@@ -6,7 +6,7 @@ using Voguedi.MongoDB;
 
 namespace Voguedi.Domain.Repositories.MongoDB
 {
-    class MongoDBRepository<TAggregateRoot, TIdentity> : Repository<TAggregateRoot, TIdentity>, IMongoDBRepository<TAggregateRoot, TIdentity>
+    public class MongoDBRepository<TAggregateRoot, TIdentity> : Repository<TAggregateRoot, TIdentity>, IMongoDBRepository<TAggregateRoot, TIdentity>
         where TAggregateRoot : class, IAggregateRoot<TIdentity>
     {
         #region Ctors

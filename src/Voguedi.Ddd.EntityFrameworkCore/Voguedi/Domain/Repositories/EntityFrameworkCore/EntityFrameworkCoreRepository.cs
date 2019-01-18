@@ -8,7 +8,7 @@ using Voguedi.Domain.AggregateRoots;
 
 namespace Voguedi.Domain.Repositories.EntityFrameworkCore
 {
-    class EntityFrameworkCoreRepository<TAggregateRoot, TIdentity> : Repository<TAggregateRoot, TIdentity>, IEntityFrameworkCoreRepository<TAggregateRoot, TIdentity>
+    public class EntityFrameworkCoreRepository<TAggregateRoot, TIdentity> : Repository<TAggregateRoot, TIdentity>, IEntityFrameworkCoreRepository<TAggregateRoot, TIdentity>
         where TAggregateRoot : class, IAggregateRoot<TIdentity>
     {
         #region Ctors
@@ -25,13 +25,9 @@ namespace Voguedi.Domain.Repositories.EntityFrameworkCore
 
         public override void Create(TAggregateRoot aggregateRoot) => DbSet.Add(aggregateRoot);
 
-        public override void Delete(TAggregateRoot aggregateRoot) => DbSet.Remove(aggregateRoot);
-
-        public override IQueryable<TAggregateRoot> GetAll() => DbSet.AsQueryable();
-
-        public override void Modify(TAggregateRoot aggregateRoot) => DbSet.Update(aggregateRoot);
-
         public override Task CreateAsync(TAggregateRoot aggregateRoot) => DbSet.AddAsync(aggregateRoot);
+
+        public override void Delete(TAggregateRoot aggregateRoot) => DbSet.Remove(aggregateRoot);
 
         public override async Task DeleteAsync(TIdentity id) => await DeleteAsync(await FindAsync(id));
 
@@ -40,6 +36,10 @@ namespace Voguedi.Domain.Repositories.EntityFrameworkCore
             foreach (var aggregateRoot in await FindAllAsync(specification))
                 await DeleteAsync(aggregateRoot);
         }
+
+        public override void Modify(TAggregateRoot aggregateRoot) => DbSet.Update(aggregateRoot);
+
+        public override IQueryable<TAggregateRoot> GetAll() => DbSet.AsQueryable();
 
         public override Task<int> CountAllAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
             => specification != null ? GetAll().Where(specification).CountAsync() : GetAll().CountAsync();

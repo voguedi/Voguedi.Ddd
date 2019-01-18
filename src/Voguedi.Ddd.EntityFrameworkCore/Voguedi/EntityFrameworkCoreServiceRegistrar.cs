@@ -7,7 +7,7 @@ using Voguedi.Domain.Repositories.EntityFrameworkCore;
 
 namespace Voguedi
 {
-    class EntityFrameworkCoreServiceRegistrar<TDbContext> : IServiceRegistrar
+    public class EntityFrameworkCoreServiceRegistrar<TDbContext> : IServiceRegistrar
         where TDbContext : DbContext
     {
         #region Private Fields
@@ -26,7 +26,7 @@ namespace Voguedi
 
         public void Register(IServiceCollection services)
         {
-            services.AddDbContext<TDbContext>(setupAction);
+            services.AddDbContextPool<TDbContext>(setupAction);
             services.TryAddScoped<IRepositoryContext, EntityFrameworkCoreRepositoryContext<TDbContext>>();
             services.TryAddScoped<IRepositoryContext<TDbContext>, EntityFrameworkCoreRepositoryContext<TDbContext>>();
         }

@@ -3,7 +3,7 @@ using Voguedi.MongoDB;
 
 namespace Voguedi.Domain.Repositories.MongoDB
 {
-    class MongoDBRepositoryContext<TDbContext> : RepositoryContext<TDbContext>
+    public class MongoDBRepositoryContext<TDbContext> : RepositoryContext<TDbContext>
         where TDbContext : class, IMongoDBContext
     {
         #region Ctors

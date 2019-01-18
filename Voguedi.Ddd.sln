@@ -21,6 +21,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.MongoDB", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer", "samples\Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer\Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.csproj", "{5163FC71-276B-4839-A4E7-DE039AB95D8F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AAE40FA-9986-4379-B1C2-899588723D56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voguedi.Ddd.Tests", "tests\Voguedi.Ddd.Tests\Voguedi.Ddd.Tests.csproj", "{4831818E-16E3-49F8-9DC0-8871351BD362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voguedi.Ddd.EntityFrameworkCore.Tests", "tests\Voguedi.Ddd.EntityFrameworkCore.Tests\Voguedi.Ddd.EntityFrameworkCore.Tests.csproj", "{26422A89-0B9C-4963-8165-E9988A13DE15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +61,14 @@ Global
 		{5163FC71-276B-4839-A4E7-DE039AB95D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5163FC71-276B-4839-A4E7-DE039AB95D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5163FC71-276B-4839-A4E7-DE039AB95D8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4831818E-16E3-49F8-9DC0-8871351BD362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4831818E-16E3-49F8-9DC0-8871351BD362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4831818E-16E3-49F8-9DC0-8871351BD362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4831818E-16E3-49F8-9DC0-8871351BD362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26422A89-0B9C-4963-8165-E9988A13DE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26422A89-0B9C-4963-8165-E9988A13DE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26422A89-0B9C-4963-8165-E9988A13DE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26422A89-0B9C-4963-8165-E9988A13DE15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +81,8 @@ Global
 		{278BFD08-6571-4E17-9B85-6264F351EF50} = {98337031-439E-4227-9972-B4F268B94A23}
 		{E840872A-9ACA-4630-B5AB-C47C49FB673D} = {98337031-439E-4227-9972-B4F268B94A23}
 		{5163FC71-276B-4839-A4E7-DE039AB95D8F} = {57905A67-AAA6-42F6-BD12-FDB607F1CDB7}
+		{4831818E-16E3-49F8-9DC0-8871351BD362} = {0AAE40FA-9986-4379-B1C2-899588723D56}
+		{26422A89-0B9C-4963-8165-E9988A13DE15} = {0AAE40FA-9986-4379-B1C2-899588723D56}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {561DD488-6EAF-4A40-8B97-16CE80127B96}
