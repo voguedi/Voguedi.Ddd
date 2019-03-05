@@ -69,7 +69,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 if (options.MapConfigs?.Length > 0)
                     s.MapConfigs.AddRange(options.MapConfigs);
             });
-            services.AddAspectCore(options.AspectConfig);
             return services;
         }
 

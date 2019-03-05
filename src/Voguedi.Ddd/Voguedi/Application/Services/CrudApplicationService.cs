@@ -47,6 +47,9 @@ namespace Voguedi.Application.Services
 
         protected virtual IReadOnlyList<TDataObject> CreateRange(IReadOnlyList<TCreateDataObject> createDataObjects)
         {
+            if (createDataObjects == null)
+                throw new ArgumentNullException(nameof(createDataObjects));
+
             if (createDataObjects?.Count > 0)
             {
                 var aggregateRoots = createDataObjects.Select(dto => MapToAggregateRoot(dto));

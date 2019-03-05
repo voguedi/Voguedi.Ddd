@@ -13,9 +13,9 @@ namespace Voguedi.Domain.Repositories.EntityFrameworkCore
     {
         #region Ctors
 
-        public EntityFrameworkCoreRepository(IRepositoryContext context)
+        public EntityFrameworkCoreRepository(IRepositoryContext repositoryContext)
         {
-            DbContext = (DbContext)context.DbContext;
+            DbContext = (DbContext)repositoryContext.DbContext;
             DbSet = DbContext.Set<TAggregateRoot>();
         }
 
@@ -50,7 +50,7 @@ namespace Voguedi.Domain.Repositories.EntityFrameworkCore
         public override async Task<IReadOnlyList<TAggregateRoot>> FindAllAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
             => specification != null ? await GetAll().Where(specification).ToListAsync() : await GetAll().ToListAsync();
 
-        public override Task<TAggregateRoot> FindAsync(TIdentity id) => GetAll().FirstOrDefaultAsync(GetIdEqualitySepcification(id));
+        public override Task<TAggregateRoot> FindAsync(TIdentity id) => GetAll().FirstOrDefaultAsync(BuildIdEqualsSepcification(id));
 
         public override Task<TAggregateRoot> FindFirstAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
             => specification != null ? GetAll().FirstOrDefaultAsync(specification) : GetAll().FirstOrDefaultAsync();

@@ -32,9 +32,9 @@ namespace Voguedi.Domain.Repositories
             where TAggregateRoot : class, IAggregateRoot<TIdentity>
             => repository.ToEntityFrameworkCoreRepository().DbSet;
 
-        public static IQueryable<TAggregateRoot> GetAllIncludeDetails<TAggregateRoot, TIdentity>(
+        public static IQueryable<TAggregateRoot> GetAllIncluded<TAggregateRoot, TIdentity>(
             this IRepository<TAggregateRoot, TIdentity> repository,
-            params Expression<Func<TAggregateRoot, object>>[] detailSepcifications)
+            params Expression<Func<TAggregateRoot, object>>[] sepcifications)
             where TAggregateRoot : class, IAggregateRoot<TIdentity>
         {
             if (repository == null)
@@ -42,9 +42,9 @@ namespace Voguedi.Domain.Repositories
 
             var aggregateRoots = repository.GetAll();
 
-            if (detailSepcifications?.Count() > 0)
+            if (sepcifications?.Count() > 0)
             {
-                foreach (var specification in detailSepcifications)
+                foreach (var specification in sepcifications)
                     aggregateRoots = aggregateRoots.Include(specification);
             }
 

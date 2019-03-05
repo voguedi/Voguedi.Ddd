@@ -12,7 +12,7 @@ namespace Voguedi.Domain.Repositories
     {
         #region Private Fields
 
-        readonly ConcurrentDictionary<Type, object> repositoryMapping = new ConcurrentDictionary<Type, object>();
+        readonly ConcurrentDictionary<Type, IRepository> repositoryMapping;
 
         #endregion
 
@@ -20,8 +20,9 @@ namespace Voguedi.Domain.Repositories
 
         protected RepositoryContext(TDbContext dbContext)
         {
-            Id = ObjectId.NewObjectId().ToString();
             DbContext = dbContext;
+            Id = ObjectId.NewObjectId().ToString();
+            repositoryMapping = new ConcurrentDictionary<Type, IRepository>();
         }
 
         #endregion
@@ -59,7 +60,7 @@ namespace Voguedi.Domain.Repositories
         }
 
         IRepository<TAggregateRoot, TIdentity> IRepositoryContext.GetRepository<TAggregateRoot, TIdentity>()
-            => (IRepository<TAggregateRoot, TIdentity>)repositoryMapping.GetOrAdd(typeof(TAggregateRoot), CreateRepository<TAggregateRoot, TIdentity>());
+            => (IRepository<TAggregateRoot, TIdentity>)repositoryMapping.GetOrAddIfNotNull(typeof(TAggregateRoot), CreateRepository<TAggregateRoot, TIdentity>());
 
         #endregion
     }

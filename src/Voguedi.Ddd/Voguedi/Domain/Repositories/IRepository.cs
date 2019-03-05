@@ -3,35 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Voguedi.AspectCore;
 using Voguedi.Domain.AggregateRoots;
 
 namespace Voguedi.Domain.Repositories
 {
-    public interface IRepository<TAggregateRoot, TIdentity>
+    public interface IRepository { }
+
+    public interface IRepository<TAggregateRoot, TIdentity> : IRepository
         where TAggregateRoot : class, IAggregateRoot<TIdentity>
     {
         #region Methods
 
-        void Create([NotNull] TAggregateRoot aggregateRoot);
+        void Create(TAggregateRoot aggregateRoot);
 
-        Task CreateAsync([NotNull] TAggregateRoot aggregateRoot);
+        Task CreateAsync(TAggregateRoot aggregateRoot);
 
-        void Delete([NotNull] TAggregateRoot aggregateRoot);
+        void Delete(TAggregateRoot aggregateRoot);
 
-        Task DeleteAsync([NotNull] TAggregateRoot aggregateRoot);
+        Task DeleteAsync(TAggregateRoot aggregateRoot);
 
         void Delete(TIdentity id);
 
         Task DeleteAsync(TIdentity id);
 
-        void Delete([NotNull] Expression<Func<TAggregateRoot, bool>> specification);
+        void Delete(Expression<Func<TAggregateRoot, bool>> specification);
 
-        Task DeleteAsync([NotNull] Expression<Func<TAggregateRoot, bool>> specification);
+        Task DeleteAsync(Expression<Func<TAggregateRoot, bool>> specification);
 
-        void Modify([NotNull] TAggregateRoot aggregateRoot);
+        void Modify(TAggregateRoot aggregateRoot);
 
-        Task ModifyAsync([NotNull] TAggregateRoot aggregateRoot);
+        Task ModifyAsync(TAggregateRoot aggregateRoot);
 
         IQueryable<TAggregateRoot> GetAll();
 

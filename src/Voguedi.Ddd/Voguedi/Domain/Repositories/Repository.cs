@@ -12,7 +12,7 @@ namespace Voguedi.Domain.Repositories
     {
         #region Protected Methods
 
-        protected static Expression<Func<TAggregateRoot, bool>> GetIdEqualitySepcification(TIdentity id)
+        protected static Expression<Func<TAggregateRoot, bool>> BuildIdEqualsSepcification(TIdentity id)
         {
             var parameter = Expression.Parameter(typeof(TAggregateRoot));
             var body = Expression.Equal(Expression.PropertyOrField(parameter, "Id"), Expression.Constant(id, typeof(TIdentity)));
@@ -45,7 +45,7 @@ namespace Voguedi.Domain.Repositories
 
         public virtual void Delete(TIdentity id)
         {
-            var aggregateRoot = Find(id);
+            var aggregateRoot = GetAll().FirstOrDefault(BuildIdEqualsSepcification(id));
 
             if (aggregateRoot != null)
                 Delete(aggregateRoot);
@@ -59,7 +59,7 @@ namespace Voguedi.Domain.Repositories
 
         public virtual void Delete(Expression<Func<TAggregateRoot, bool>> specification)
         {
-            foreach (var aggregateRoot in FindAll(specification))
+            foreach (var aggregateRoot in GetAll().Where(specification))
                 Delete(aggregateRoot);
         }
 
@@ -74,7 +74,7 @@ namespace Voguedi.Domain.Repositories
         public virtual Task<bool> ExistsAsync(Expression<Func<TAggregateRoot, bool>> specification = null)
             => Task.FromResult(Exists(specification));
 
-        public virtual TAggregateRoot Find(TIdentity id) => GetAll().FirstOrDefault(GetIdEqualitySepcification(id));
+        public virtual TAggregateRoot Find(TIdentity id) => GetAll().FirstOrDefault(BuildIdEqualsSepcification(id));
 
         public virtual IReadOnlyList<TAggregateRoot> FindAll(Expression<Func<TAggregateRoot, bool>> specification = null)
             => specification != null ? GetAll().Where(specification).ToList() : GetAll().ToList();

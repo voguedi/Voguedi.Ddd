@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AspectCore.Configuration;
 using IAutoMapperMapperConfigurationExpression = AutoMapper.IMapperConfigurationExpression;
 
 namespace Voguedi
@@ -22,8 +21,6 @@ namespace Voguedi
 
         internal Action<IAutoMapperMapperConfigurationExpression>[] MapConfigs { get; set; }
 
-        internal Action<IAspectConfiguration> AspectConfig { get; set; }
-
         #endregion
 
         #region Public Methods
@@ -39,8 +36,6 @@ namespace Voguedi
         public void RegisterAssemblies(params Assembly[] assemblies) => Assemblies = assemblies;
 
         public void RegisterAutoMapper(params Action<IAutoMapperMapperConfigurationExpression>[] mapConfigs) => MapConfigs = mapConfigs;
-
-        public void RegisterAspectCore(Action<IAspectConfiguration> aspectConfig) => AspectConfig = aspectConfig;
 
         #endregion
     }
