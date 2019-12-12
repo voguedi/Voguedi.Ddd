@@ -1,31 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2046
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{98337031-439E-4227-9972-B4F268B94A23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{57905A67-AAA6-42F6-BD12-FDB607F1CDB7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd", "src\Voguedi.Ddd\Voguedi.Ddd.csproj", "{7808670A-FA26-4D2F-9D38-5CBAAE5D231E}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.EntityFrameworkCore", "src\Voguedi.Ddd.EntityFrameworkCore\Voguedi.Ddd.EntityFrameworkCore.csproj", "{54F332DC-16CD-43FD-9AC2-B9E0A714EDEB}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.EntityFrameworkCore.MySql", "src\Voguedi.Ddd.EntityFrameworkCore.MySql\Voguedi.Ddd.EntityFrameworkCore.MySql.csproj", "{144A6CB0-5094-410B-B104-D074AA7B96E0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.EntityFrameworkCore.PostgreSql", "src\Voguedi.Ddd.EntityFrameworkCore.PostgreSql\Voguedi.Ddd.EntityFrameworkCore.PostgreSql.csproj", "{017A0104-9C62-46C5-A27E-65C43C328B62}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.EntityFrameworkCore.SqlServer", "src\Voguedi.Ddd.EntityFrameworkCore.SqlServer\Voguedi.Ddd.EntityFrameworkCore.SqlServer.csproj", "{278BFD08-6571-4E17-9B85-6264F351EF50}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.MongoDB", "src\Voguedi.Ddd.MongoDB\Voguedi.Ddd.MongoDB.csproj", "{E840872A-9ACA-4630-B5AB-C47C49FB673D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer", "samples\Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer\Voguedi.Ddd.Samples.EntityFrameworkCore.SqlServer.csproj", "{5163FC71-276B-4839-A4E7-DE039AB95D8F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AAE40FA-9986-4379-B1C2-899588723D56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voguedi.Ddd.Tests", "tests\Voguedi.Ddd.Tests\Voguedi.Ddd.Tests.csproj", "{4831818E-16E3-49F8-9DC0-8871351BD362}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voguedi.Ddd.EntityFrameworkCore.Tests", "tests\Voguedi.Ddd.EntityFrameworkCore.Tests\Voguedi.Ddd.EntityFrameworkCore.Tests.csproj", "{26422A89-0B9C-4963-8165-E9988A13DE15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voguedi.Ddd.Domain", "src\Voguedi.Ddd.Domain\Voguedi.Ddd.Domain.csproj", "{CDF039D7-DCD0-4BE4-8184-05566E7584C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,56 +17,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7808670A-FA26-4D2F-9D38-5CBAAE5D231E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7808670A-FA26-4D2F-9D38-5CBAAE5D231E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7808670A-FA26-4D2F-9D38-5CBAAE5D231E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7808670A-FA26-4D2F-9D38-5CBAAE5D231E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54F332DC-16CD-43FD-9AC2-B9E0A714EDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54F332DC-16CD-43FD-9AC2-B9E0A714EDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54F332DC-16CD-43FD-9AC2-B9E0A714EDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54F332DC-16CD-43FD-9AC2-B9E0A714EDEB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{144A6CB0-5094-410B-B104-D074AA7B96E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{144A6CB0-5094-410B-B104-D074AA7B96E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{144A6CB0-5094-410B-B104-D074AA7B96E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{144A6CB0-5094-410B-B104-D074AA7B96E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{017A0104-9C62-46C5-A27E-65C43C328B62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{017A0104-9C62-46C5-A27E-65C43C328B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{017A0104-9C62-46C5-A27E-65C43C328B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{017A0104-9C62-46C5-A27E-65C43C328B62}.Release|Any CPU.Build.0 = Release|Any CPU
-		{278BFD08-6571-4E17-9B85-6264F351EF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{278BFD08-6571-4E17-9B85-6264F351EF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{278BFD08-6571-4E17-9B85-6264F351EF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{278BFD08-6571-4E17-9B85-6264F351EF50}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E840872A-9ACA-4630-B5AB-C47C49FB673D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E840872A-9ACA-4630-B5AB-C47C49FB673D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E840872A-9ACA-4630-B5AB-C47C49FB673D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E840872A-9ACA-4630-B5AB-C47C49FB673D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5163FC71-276B-4839-A4E7-DE039AB95D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5163FC71-276B-4839-A4E7-DE039AB95D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5163FC71-276B-4839-A4E7-DE039AB95D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5163FC71-276B-4839-A4E7-DE039AB95D8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4831818E-16E3-49F8-9DC0-8871351BD362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4831818E-16E3-49F8-9DC0-8871351BD362}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4831818E-16E3-49F8-9DC0-8871351BD362}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4831818E-16E3-49F8-9DC0-8871351BD362}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26422A89-0B9C-4963-8165-E9988A13DE15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26422A89-0B9C-4963-8165-E9988A13DE15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26422A89-0B9C-4963-8165-E9988A13DE15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26422A89-0B9C-4963-8165-E9988A13DE15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDF039D7-DCD0-4BE4-8184-05566E7584C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDF039D7-DCD0-4BE4-8184-05566E7584C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDF039D7-DCD0-4BE4-8184-05566E7584C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDF039D7-DCD0-4BE4-8184-05566E7584C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7808670A-FA26-4D2F-9D38-5CBAAE5D231E} = {98337031-439E-4227-9972-B4F268B94A23}
-		{54F332DC-16CD-43FD-9AC2-B9E0A714EDEB} = {98337031-439E-4227-9972-B4F268B94A23}
-		{144A6CB0-5094-410B-B104-D074AA7B96E0} = {98337031-439E-4227-9972-B4F268B94A23}
-		{017A0104-9C62-46C5-A27E-65C43C328B62} = {98337031-439E-4227-9972-B4F268B94A23}
-		{278BFD08-6571-4E17-9B85-6264F351EF50} = {98337031-439E-4227-9972-B4F268B94A23}
-		{E840872A-9ACA-4630-B5AB-C47C49FB673D} = {98337031-439E-4227-9972-B4F268B94A23}
-		{5163FC71-276B-4839-A4E7-DE039AB95D8F} = {57905A67-AAA6-42F6-BD12-FDB607F1CDB7}
-		{4831818E-16E3-49F8-9DC0-8871351BD362} = {0AAE40FA-9986-4379-B1C2-899588723D56}
-		{26422A89-0B9C-4963-8165-E9988A13DE15} = {0AAE40FA-9986-4379-B1C2-899588723D56}
+		{CDF039D7-DCD0-4BE4-8184-05566E7584C7} = {98337031-439E-4227-9972-B4F268B94A23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {561DD488-6EAF-4A40-8B97-16CE80127B96}
